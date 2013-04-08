@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+ "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+   <!-- See http://developer.yahoo.com/yui/grids/ for info on the grid layout -->
+   <title>Timeline Visualization: Photography Exhibition Catalogues in Artexte Collection (1960-) :: PhotographyMedia.com</title>
+   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+   
+
+   <!-- See http://developer.yahoo.com/yui/ for info on the reset, font and base css -->
+   <link rel="stylesheet" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+   
+   <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/base/base-min.css"> 
+
+   
+
+<!-- Load the Timeline library after reseting the fonts, etc -->
+	<script>
+     var Timeline_ajax_url="timeline_2.3.1/simile-ajax-api.js?bundle=false";
+     var Timeline_urlPrefix='timeline_2.3.1/';       
+    </script>
+   <script src="timeline_2.3.1/timeline-api.js?bundle=false" type="text/javascript"></script>
+   
+ 
+  <link rel="stylesheet" href="local_example.css" type="text/css">
+
+  
+
+  <script src="EPrintsData.php" type="text/javascript"></script>  
+  
+
+    <script>
+        var tl;
+        
+        function onLoad() {
+            var eventSource = new Timeline.DefaultEventSource(0);
+            
+            var theme = Timeline.ClassicTheme.create();
+            theme.event.instant.icon = "timeline_2.3.1/images/dark-green-circle.png";
+            theme.event.instant.iconWidth = 10;  // These are for the default stand-alone icon
+            theme.event.instant.iconHeight = 10;
+            
+            var d = Timeline.DateTime.parseIso8601DateTime("1967");                                        
+			theme.timeline_start = new Date(Date.UTC(1960, 0, 1));
+            
+			theme.timeline_stop  = new Date(Date.UTC(2020, 0, 1));
+      
+            
+            var bandInfos = [
+                Timeline.createBandInfo({
+                    width:          "90%", 
+                    intervalUnit:   Timeline.DateTime.YEAR, 
+                    intervalPixels: 600,
+                    eventSource:    eventSource,
+                    date:           d,
+                    theme:          theme,
+                    eventPainter:   Timeline.CompactEventPainter,
+                    eventPainterParams: {
+                        iconLabelGap:     5,
+                        labelRightMargin: 20,
+                        maxLabelWidth: 500,		// TN: MaxLabelWidth
+                        iconWidth:        80, // These are for per-event custom icons
+                        iconHeight:       80,
+                        
+                        stackConcurrentPreciseInstantEvents: {
+                            limit: 20,
+                            moreMessageTemplate:    "[%0 More]",
+                            icon:                   "timeline_2.3.1/images/dark-green-circle.png", // default icon in stacks
+                            iconWidth:              10,
+                            iconHeight:             10
+                        }
+                    }
+                }),
+                Timeline.createBandInfo({
+                    width:          "10%", 
+                    intervalUnit:   Timeline.DateTime.DECADE, 
+                    intervalPixels: 120,
+                    eventSource:    eventSource,
+                    date:           d,
+                    theme:          theme,
+                    layout:         'overview'  // original, overview, detailed
+                })
+            ];
+            bandInfos[1].syncWith = 0;
+            bandInfos[1].highlight = true;
+            
+            tl = Timeline.create(document.getElementById("tl"), bandInfos, Timeline.HORIZONTAL);
+             var url = '.'; // The base url for image, icon and background image
+                           
+			eventSource.loadJSON(timeline_data, url);      
+			tl.layout(); 
+        }
+        
+        var resizeTimerID = null;
+        function onResize() {
+            if (resizeTimerID == null) {
+                resizeTimerID = window.setTimeout(function() {
+                    resizeTimerID = null;
+                    tl.layout();
+                }, 500);
+            }
+        }
+    </script>
+</head>
+<body onload="onLoad();" onresize="onResize();">
+<div style="margin-bottom:5px;background-color:#ffffff;text-align:left;">
+<a href="http://www.photographymedia.com/">
+<img 
+src="photography_media.jpg" style="border:0px;"
+alt="PhotographyMedia.com" title="PhotographyMedia" /></a>
+</div>
+    <div id="header">
+      <h1>Timeline Visualization: Photography Exhibition Catalogues in Artexte Collection (1960-)</h1>
+    </div>
+  
+    <div id="content">
+    
+      <div id="tl" class="timeline-default" style="height: 450px;"></div>
+    </div>
+    
+   <div id="footer">
+   Based on the open source <a href="http://www.simile-widgets.org/timeline/">Timeline</a><br />
+   E-Artexte visualization integration by Tomasz Neugebauer <br />
+   Data source: photography exhibition catalogue metadata from <a href="http://e-artexte.ca">e-artexte.ca</a><br />
+   keywords: photography OR photographie. <br />
+   primary item type: exhibition catalogues.  <br />
+   publishing date: 1960-  <br />
+   <script src="fileLastUpdate.php" type="text/javascript"></script>
+   </div> 
+</body>
+</html>
+
+
