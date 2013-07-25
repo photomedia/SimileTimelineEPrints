@@ -27,11 +27,24 @@
 
   
 
-  <script src="EPrintsData.php" type="text/javascript"></script>  
-  
-
-    <script>
+  <script type="text/javascript">
+	
+	window.onload= function(){ 
+  		$.ajax({ 
+  				url: 'EPrintsData.php', 
+ 				type: 'json', 
+  				dataType: 'script', 
+  				cache: 'true',
+ 				 success: function(data) { 
+   							 onLoad();
+   							 $('#loading').html('');
+   							 
+  				} 
+			});
+		}
+                
         var tl;
+
         
         function onLoad() {
             var eventSource = new Timeline.DefaultEventSource(0);
@@ -113,7 +126,7 @@ alt="PhotographyMedia.com" title="PhotographyMedia" /></a>
     <div id="header">
       <h1>Timeline Visualization: Photography Exhibition Catalogues in Artexte Collection (1960-)</h1>
     </div>
-  
+  <div id="loading"><img src="loading.gif" />Loading ...</div>
     <div id="content">
     
       <div id="tl" class="timeline-default" style="height: 450px;"></div>
