@@ -104,14 +104,14 @@
         }
         
         var resizeTimerID = null;
-        function onResize() {
-            if (resizeTimerID == null) {
+    	$(window).resize(function() {
+        if (resizeTimerID == null) {
                 resizeTimerID = window.setTimeout(function() {
                     resizeTimerID = null;
                     tl.layout();
                 }, 500);
             }
-        }
+        });
     </script>
 </head>
 <body onload="onLoad();" onresize="onResize();">
