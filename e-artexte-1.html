@@ -37,13 +37,21 @@
   				url: 'EPrintsData.php', 
   				dataType: 'script', 
   				cache: 'true',
- 				 success: function(data) { 
+ 				success: function(data) { 
    							 onLoad();
    							 $('#loading').html('');
+   							 $.ajax({
+   							 	url:'fileLastUpdate.php',
+   							 	dataType: 'text',
+   							 	success: function(data){
+   							 		$('#fileLastUpdate').html(data);
+   							 	}
+   							 });
    							 
   				} 
 			});
 		}
+                
                 
 
        
@@ -140,7 +148,7 @@ alt="PhotographyMedia.com" title="PhotographyMedia" /></a>
    Data source: photography exhibition catalogue metadata from <a href="http://e-artexte.ca">e-artexte.ca</a><br />
    Documentation: <a href="http://www.photographymedia.com/visualizations/artexte/timeline.html">http://www.photographymedia.com/visualizations/artexte/timeline.html</a><br />
    Source Code: <a href="https://github.com/photomedia/SimileTimelineEPrints">github.com/photomedia/SimileTimelineEPrints</a><br />
-   <script src="fileLastUpdate.php" type="text/javascript"></script>
+   <div id="fileLastUpdate"></div>
    </div> 
 </body>
 </html>
