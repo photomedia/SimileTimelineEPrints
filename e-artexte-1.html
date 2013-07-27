@@ -27,8 +27,12 @@
   
 
   <script type="text/javascript">
-	
-	window.onload= function(){ 
+	SimileAjax.History.enabled = false;
+	var tl;
+	var resizeTimerID = 1;
+
+
+		window.onload= function(){ 
   		$.ajax({ 
   				url: 'EPrintsData.php', 
   				dataType: 'script', 
@@ -41,9 +45,8 @@
 			});
 		}
                 
-        var tl;
 
-        
+       
         function onLoad() {
             var eventSource = new Timeline.DefaultEventSource(0);
             
@@ -101,10 +104,11 @@
                            
 			eventSource.loadJSON(timeline_data, url);      
 			tl.layout(); 
+			resizeTimerID = null;
+			
         }
-        
-        var resizeTimerID = null;
-    	$(window).resize(function() {
+                
+        $(window).resize(function() {
         if (resizeTimerID == null) {
                 resizeTimerID = window.setTimeout(function() {
                     resizeTimerID = null;

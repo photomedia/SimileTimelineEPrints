@@ -25,7 +25,7 @@
  
 SimileAjax.History = {
     maxHistoryLength:       10,
-    historyFile:            "__history__.html",
+    historyFile:            "history.html",
     enabled:               true,
     
     _initialized:           false,
