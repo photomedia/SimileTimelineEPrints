@@ -37,6 +37,9 @@
   				url: 'EPrintsData.php', 
   				dataType: 'script', 
   				cache: 'true',
+  				error: function(data){
+  					$('#loading').html('Failed to load data for some reason.  Please try again by clicking reload on your browser. ');
+  				},
  				success: function(data) { 
    							 onLoad();
    							 $('#loading').html('');

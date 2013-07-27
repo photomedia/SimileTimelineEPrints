@@ -1,4 +1,6 @@
 <?php
+set_time_limit(120);
+header('Content-type: text/javascript');
 echo('
 var timeline_data = {  // save as a global variable
 \'dateTimeFormat\': \'iso8601\',
