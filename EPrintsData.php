@@ -1,11 +1,18 @@
 <?php
 set_time_limit(120);
+$file = "eartextedata.js";
+$offset = 60 * 60 * 24 * 30;
+if (file_exists($file)) {
+	$expires=gmdate("D, d M Y H:i:s", filemtime($file) + $offset) . " GMT";
+	header("Expires: " . $expires);
+	$cacheMaxAge=(filemtime($file) + $offset)-time();
+	header("Cache-Control: max-age=$cacheMaxAge, must-revalidate"); 
+}
 header('Content-type: text/javascript');
 echo('
 var timeline_data = {  // save as a global variable
 \'dateTimeFormat\': \'iso8601\',
 events :');
-$file = "eartextedata.js";
 $cache_file=$file;
 
 // seconds * minutes * hours * days	
