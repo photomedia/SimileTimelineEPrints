@@ -8,7 +8,10 @@ html  {}
 #ft {padding-bottom: 1em;}
 #bd div.yui-g {margin: 2em;}
 p {margin-top: .5em;}
-
+#loading {position: absolute;
+			left: 40%;
+			top: 180px;
+			}
 
 
 .footnotes {
