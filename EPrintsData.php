@@ -12,7 +12,7 @@ if (file_exists($file)) {
 
 echo('
 var timeline_data = {  // save as a global variable
-\'dateTimeFormat\': \'gregorian\',
+\'dateTimeFormat\': \'iso8601\',
 events :');
 $cache_file=$file;
 
